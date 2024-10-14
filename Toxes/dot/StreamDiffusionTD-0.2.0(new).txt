@@ -1,0 +1,65 @@
+Get the TOX here >>> https://www.patreon.com/posts/110313168
+
+StreamDiffusionTD 0.2.0 [ Installation + Setup ] >>> https://www.youtube.com/watch?v=F2JSWAKex4k
+
+New Features
+V2V temporal consistency for smoother output
+- New V2V parameter page (alt + hover over parameters for more info on each parameter)
+- Can be enabled/disabled during streaming or before start
+- Not supported with TensorRT
+
+Pause / Play / Unload commands
+- Streaming can be paused or unloaded to free up resources/VRAM
+- Can be restarted (immediately if paused) without rebooting the server process by hitting Start Stream (or turning Pause to OFF, if paused)
+- 'Stop Stream' pulse still shuts down the entire server
+- 'Unload Models' keeps the server alive and listening but frees vram. (Config - model parameters + step sliders + acceleration mode, etc - can be updated when unloaded before starting stream again)
+
+Improved Model Loading + Offline usage
+ControlNet compatibility for sd-turbo + sdxs + sdxl-turbo added
+- New 'Download ControlNet' option will automatically download controlnet for 1.5, sd-turbo, and sdxs models with tested working configurations. Choose which model type to download and it will store the ControlNet file in 'StreamDiffusion/Models/ControlNet' folder
+
+All models run offline (unless downloading for first time)
+- Added support for direct link to huggingface safetensors file
+
+Force Model Pipeline option
+- Forces the model loading process to use a specific model type
+- Helpful when model loads as the wrong type
+- See additional printouts in server CMD prompt that display the model type being loaded
+
+Add option to set Huggingface Cache (in Install parameter page)
+
+LoRA Loading now supports swapping models and weight adjustment
+- When loading the LoRA, there may be a pause in the output from streamdiffusion, but adjusting the weight once loaded should work with minimal lag
+- Cmd window will print error if LoRA tries to load and cannot be loaded, but will not interrupt the output.
+
+Added display icons to show general settings in top left of the operator (can be toggled off in About page.)
+
+Shows server status, txt2img or img2img, and whether or not tensorrt, V2V, and controlnet are each active.
+
+"Create Synced Component" (Synccreate) pulse added (Settings 2 page, under 'Op Create')
+
+Adds a base component with independent timeline that moves forward at the same rate as your current stream
+
+Adds necessary callback code for syncing with StreamDiffusionTD (onReceiveFrame must be ON)
+
+Exposes timeline parameters with additional Reset/Resetpulse on newly created component
+
+TensorRT model loader
+
+Dropdown list of built TensorRT engines in current installation of streamdiffusion
+
+"Load Engine Parameters" pulse (Setengine) for loading model, step count, and TensorRT settings
+
+Note: Some settings (e.g., CustomLCM/SkipLCM toggles) may need manual adjustment
+
+And More:
+
+Skip LCM LoRA toggle in Models page can be used to not load an LCM LoRA... Useful for models with merged LCM weights (like PhotonLCM)
+
+Much improved print logs in the command window + more detailed messages for common errors.
+
+Optimized image buffer in/out of TD for fewer frame drops
+
+Removed built-in parameters (option to toggle back on in About page) + renamed "Stream Settings 1" page to "Settings 1"
+
+Improved installation process + updated install guide + fixed install guide loading issue
