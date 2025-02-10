@@ -6,26 +6,36 @@ from data.theme_artists import theme_artists
 
 # Define multiple templates
 templates = [
-    "A {descriptor}, {artist_styles}, featuring {primary} with {modifier}, including {additional_elements}, illuminated by {lighting_effects}, evoking a {mood} mood, {architectural_elements}, set in {context} with a {style} aesthetic and {texture_effects}.",
-    "{artist_styles}, {descriptor} environment showcasing {primary} enhanced by {modifier}, including {additional_elements}, illuminated by {lighting_effects}, evoking a {mood} mood, and incorporating {architectural_elements} within a {style} framework. {texture_effects}",
+    "A {descriptor} cybersecurity landscape, featuring {primary} with {modifier}, including {additional_elements}, illuminated by {lighting_effects}, evoking a {mood} mood, {architectural_elements}, set in {context} with a {style} aesthetic and {texture_effects}.",
+    "{artist_styles}, {descriptor} network showcasing {primary} enhanced by {modifier}, including {additional_elements}, illuminated by {lighting_effects}, evoking a {mood} mood, and incorporating {architectural_elements} within a {style} framework. {texture_effects}",
     "{context}, {artist_styles}, a {descriptor} scene featuring {primary} with {modifier}, including {additional_elements}, illuminated by {lighting_effects}, creating a {mood} atmosphere and featuring {architectural_elements} in a {style} style with {texture_effects}.",
-    "{artist_styles}, {descriptor} elements like {primary} intertwine with {modifier}, including {additional_elements}, illuminated by {lighting_effects}, creating a {mood} ambiance, featuring {architectural_elements}, set in {context} with a {style} aesthetic and {texture_effects}.",
+    "{artist_styles}, {descriptor} elements like {primary} intertwine with {modifier}, including {additional_elements}, illuminated by {lighting_effects}, creating a {mood} ambiance, featuring {architectural_elements}, set in {context} with a {style} aesthetic and {texture_effects}."
 ]
 
 
-def select_artists(associated_artists, artists_dict, max_artists=2):
-    """Selects a random number of artists and combines their style descriptors."""
+def select_artists(associated_artists, artists_dict, max_artists=2, max_styles=2):
+    """Selects a random number of styles and combines their descriptors."""
     num_artists = random.randint(1, max_artists)
     selected_artists = random.sample(
         associated_artists, k=min(num_artists, len(associated_artists))
     )
+    print(selected_artists)
+
     style_descriptors = []
     for artist in selected_artists:
         styles = artists_dict.get(artist, ["unique style"])
         style_descriptors.extend(styles)
+
+    # shuffle styles_descriptors
+    random.shuffle(style_descriptors)
+
+    # limit styles_descriptors to max_styles
+    style_descriptors = style_descriptors[:max_styles]
+
+    print(style_descriptors)
+
     artist_styles = ", ".join(style_descriptors)
-    artists_names = ", ".join(selected_artists)
-    return f"{artist_styles} in the style of {artists_names}"
+    return artist_styles
 
 
 def generate_prompt(theme_name):
@@ -54,6 +64,7 @@ def generate_prompt(theme_name):
 
     # Select a template
     template = random.choice(templates)
+    print(template)
 
     # Format prompt
     prompt = template.format(
@@ -82,8 +93,8 @@ def list_themes():
 def main():
     while True:
         print("\n--- Prompt Generator ---")
-        # list_themes()
-        # print("0. Exit")
+        list_themes()
+        print("0. Exit")
         try:
             choice = int(input("\nSelect a theme by number: "))
             if choice == 0:
