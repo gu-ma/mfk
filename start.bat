@@ -1,3 +1,4 @@
-set APPPATH=C:\Program Files\Derivative\TouchDesigner\bin
-start "%APPPATH%" "%APPPATH%\TouchDesigner.exe" -gpuformonitor 1 "C:\Users\mfk\OneDrive - iart ag\MfK\TD\Main\Main_Lite_New.toe"
-start "%APPPATH%" "%APPPATH%\TouchDesigner1.exe" -gpuformonitor 0 "C:\Users\mfk\OneDrive - iart ag\MfK\TD\Main\Streamdiffusion.toe"
+set APPPATH=C:\Program Files\Derivative\TouchDesigner.2023.12120\bin
+set TDPATH=C:\Users\Guillaume\Documents\Clouds\OneDrive - iart ag\MfK\TD\Main
+start "%APPPATH%" "%APPPATH%\TouchDesigner.exe" -gpuformonitor 1 "%TDPATH%\Main_Lite_New.toe"
+start "%APPPATH%" "%APPPATH%\TouchDesigner.exe" -gpuformonitor 0 "%TDPATH%\Streamdiffusion.toe"
